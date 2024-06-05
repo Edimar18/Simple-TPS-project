@@ -6,7 +6,7 @@ EDIMAR S. MOSQUIDA
 KURT BUAN
 
 ------------------------
-DISCRIPTION:
+DESCRIPTION:
 Peanutflixx Transactional Processing System is a PyQt5-based desktop application designed for 
 managing user subscriptions and purchases. It connects to a SQLite database to store user 
 information and transaction details. The system allows users to verify their identities using 
