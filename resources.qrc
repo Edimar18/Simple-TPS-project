@@ -1,0 +1,9 @@
+<RCC>
+  <qresource>
+    <file>images/icons8-user-100.png</file>
+    <file>images/logo.jpg.jpeg</file>
+  </qresource>
+  <qresource>
+    <file>images/logo2.jpeg</file>
+  </qresource>
+</RCC>
