@@ -172,7 +172,7 @@ class mainWindow(QMainWindow):
         self.label_22.setText("NAME: " + str(self.name))
         self.label_23.setText("ADDRESS: " + str(self.address))
         self.label_24.setText("PURCHASED: " + str(int(self.amount)*100))
-        self.label_25.setText("SUBSCIPTION: " + str(self.amount) +" DAYS")
+        self.label_25.setText("SUBSCRIPTION: " + str(self.amount) +" DAYS")
         self.label_26.setText("TOTAL DAYS AVAILABLE: " + str(int(totalDays)+int(self.amount)))
         QApplication.processEvents()
         self.stackedWidget.setCurrentIndex(5)
