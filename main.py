@@ -100,7 +100,7 @@ class mainWindow(QMainWindow):
             self.pushButton_2.setEnabled(True)
             
         else:
-            save_ToLog(f"ID NUMBER [{Id_Number}] WAS NOT FOUND IN THE DATABSE")
+            save_ToLog(f"ID NUMBER [{Id_Number}] WAS NOT FOUND IN THE DATABASE")
             self.pushButton_2.setEnabled(False)
             self.label_5.setStyleSheet("background-color: rgb(244, 238, 215, 200);font-size: 30px;padding-left: 10px; color: red;")
             self.label_5.setText("STATUS: NOT FOUND IN THE DATABASE")
@@ -144,7 +144,7 @@ class mainWindow(QMainWindow):
                 self.added_days = self.textEdit_2.toPlainText()
                 updated_days = str(int(totalDays)+int(self.added_days))
                 print(updated_days)
-                self.label_21.setText(str(self.added_days)+" DAYS SUCCESSFULY ADDED TO YOUR ACCOUNT")
+                self.label_21.setText(str(self.added_days)+" DAYS SUCCESSFULLY ADDED TO YOUR ACCOUNT")
                 cursor.execute(f"UPDATE users SET subscription_left = '{updated_days}' WHERE unique_id = '{self.id_Num}'")
                 new_atmBalance = str(int(atmBalance)-(int(self.added_days)*100))
                 print(new_atmBalance)
@@ -155,7 +155,7 @@ class mainWindow(QMainWindow):
                 QApplication.processEvents()
                 self.stackedWidget.setCurrentIndex(4)
             else:
-                save_ToLog(f"ATM CARD NUMBER [{card_number} DOESNT HAVE ENOUGH BALANCE")
+                save_ToLog(f"ATM CARD NUMBER [{card_number} DOESN'T HAVE ENOUGH BALANCE")
                 self.no_balance.setText("YOUR CARD DOEST HAVE ENOUGH BALANCE")
                 
             
@@ -177,7 +177,7 @@ class mainWindow(QMainWindow):
         QApplication.processEvents()
         self.stackedWidget.setCurrentIndex(5)
     def back_to_home(self):
-        save_ToLog(f"USER {self.name} {self.lname} LOGED OUT..")
+        save_ToLog(f"USER {self.name} {self.lname} LOGGED OUT..")
         self.textEdit.setText("")
         self.label_5.setText("STATUS:")
         self.pushButton_2.setEnabled(False)
