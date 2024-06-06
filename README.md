@@ -22,12 +22,12 @@ To install the Peanutflixx Transactional Processing System, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/peanutflixx-transactional-processing-system.git
+   git clone https://github.com/Edimar18/Simple-TPS-project.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd peanutflixx-transactional-processing-system
+   cd Simple-TPS-project
    ```
 
 3. Install the required dependencies:
