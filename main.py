@@ -104,6 +104,53 @@ class mainWindow(QMainWindow):
             self.pushButton_2.setEnabled(False)
             self.label_5.setStyleSheet("background-color: rgb(244, 238, 215, 200);font-size: 30px;padding-left: 10px; color: red;")
             self.label_5.setText("STATUS: NOT FOUND IN THE DATABASE")
+            self.recursive_verifier()
+     ## ADDING SOME RECURSIVE FUNCTIONALITY       
+    def recursive_verifier(self):
+        re_Id_Number = QInputDialog.getText(self, "ERROR","Please re enter your ID Number", QLineEdit.Normal)
+        if re_Id_Number[1]:
+            save_ToLog(f"Trying to re-verify user with ID Number {re_Id_Number[0]}")
+            # Check if ID number exists in the user table
+            check_query = "SELECT EXISTS(SELECT 1 FROM users WHERE unique_id=? LIMIT 1)"
+            cursor.execute(check_query, (str(re_Id_Number[0]),))
+            result = cursor.fetchone()
+            if result[0] == 1:
+                self.label_5.setText("STATUS: USER FOUND IN THE DATABASE")
+                self.label_5.setStyleSheet("background-color: rgb(244, 238, 215, 200);font-size: 30px;padding-left: 10px; color: green;")
+                get_fname = "SELECT name FROM users WHERE unique_id=?" 
+                get_lname = "SELECT last_name FROM users WHERE unique_id=?"
+                get_address = "SELECT address FROM users WHERE unique_id=?"
+                get_dayL = "SELECT subscription_left FROM users WHERE unique_id=?"
+                cursor.execute(get_fname, (str(re_Id_Number[0]),))
+                Fname = cursor.fetchone()[0]
+                self.name = Fname
+                cursor.execute(get_lname, (str(re_Id_Number[0]),))
+                lname = name = cursor.fetchone()[0]
+                self.lname = lname
+                cursor.execute(get_address, (str(re_Id_Number[0]),))
+                address = cursor.fetchone()[0]
+                self.address = address
+                cursor.execute(get_dayL, (str(re_Id_Number[0]),))
+                dayL = str(cursor.fetchone()[0])
+                self.dayL = dayL
+                save_ToLog(f"{self.name} {self.lname} WAS VERIFIED")
+                self.label_8.setText("Name: "+Fname)
+                self.label_9.setText("Surname: "+lname)
+                self.label_10.setText("Address: "+address)
+                self.label_12.setText("Subscription Days Lefts: "+dayL)
+                self.label_13.setText(re_Id_Number[0])
+                self.textEdit.setText(re_Id_Number[0])
+                self.pushButton_2.setEnabled(True)
+                
+            else:
+                save_ToLog(f"ID NUMBER [{re_Id_Number[0]}] WAS NOT FOUND IN THE DATABASE")
+                QMessageBox.warning(self,"WARNING",f"ID NUMBER [{re_Id_Number[0]}] IS NOT FOUND IN THE DATABASE")
+                self.pushButton_2.setEnabled(False)
+                self.label_5.setStyleSheet("background-color: rgb(244, 238, 215, 200);font-size: 30px;padding-left: 10px; color: red;")
+                self.label_5.setText("STATUS: NOT FOUND IN THE DATABASE")
+                self.recursive_verifier()
+        else:
+            pass
     def home_to_sub(self):
         self.stackedWidget.setCurrentIndex(1)
     def sub_to_home(self):
@@ -150,7 +197,7 @@ class mainWindow(QMainWindow):
                 print(new_atmBalance)
                 cursor.execute(f"UPDATE atm SET balance = '{new_atmBalance}' WHERE card_number = '{card_number}' AND card_pin = '{card_pin}'")
                 print("success")
-                database.commit()
+                #database.commit()
                 save_ToLog(f"PAYMENT OF {to_pay} OR EQUIVALENT TO {self.amount} DAYS WAS SUCCESSFUL")
                 QApplication.processEvents()
                 self.stackedWidget.setCurrentIndex(4)
